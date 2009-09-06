@@ -1,0 +1,13 @@
+$(document).ready(function(){
+    jQuery("body").append(
+            "<div id='popupTwitters'>"+
+            "<div id='temporaryOutputs'></div>"+
+            "</div>"+
+            "<div id='tempStatuss'>sdsdsd</div>"
+            );
+    jQuery('#popupTwitter').hide();
+	jQuery('#tempStatus').hide();
+    jQuery('#confluence-twitter').click(function(){
+        popupHtml('/plugins/servlet/socialnetworking-twitter')
+    });
+});

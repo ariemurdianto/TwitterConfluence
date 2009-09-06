@@ -1,0 +1,102 @@
+<atlassian-plugin key='confluence-twitter' name='Confluence Twitter Plugin'>
+    <plugin-info>
+        <description>Twitter on Confluence</description>
+        <vendor name="Arie Murdianto" url="http://ariemurdianto.blogspot.com"/>
+        <version>1.0.0</version>
+    </plugin-info>
+
+    <resource name="i18n" type="i18n" location="confluence-socialnetworking" />
+    <web-resource key="social-networking-resources" name="Social Networking Resources"
+                  i18n-name-key="net.ariemurdianto.resources">
+        <description>Resources which are needed by Confluence Twitter plugin</description>
+        <!--<resource type="download" name="javascript/jquery-1.2.js" location="javascript/jquery-1.2.js"/>-->
+        <resource type="download" name="javascript/twitter-connector.js" location="javascript/twitter-connector.js"/>
+        <resource type="download" name="javascript/facebox.js" location="javascript/facebox.js"/>
+        <resource type="download" name="javascript/socialnetworking-init.js" location="javascript/socialnetworking-init.js"/>
+
+        <resource type="download" name="stylesheets/facebox.css" location="stylesheets/facebox.css"/>
+        <resource type="download" name="stylesheets/connector-style.css" location="stylesheets/connector-style.css"/>
+        
+        <resource type="download" name="images/b.png" location="images/b.png">
+            <param name="content-type" value="image/png"/>            
+        </resource>
+        <resource type="download" name="images/br.png" location="images/br.png">
+            <param name="content-type" value="image/png"/>
+        </resource>
+        <resource type="download" name="images/bl.png" location="images/bl.png">
+            <param name="content-type" value="image/png"/>
+        </resource>
+        <resource type="download" name="images/tl.png" location="images/tl.png">
+            <param name="content-type" value="image/png"/>
+        </resource>
+        <resource type="download" name="images/tr.png" location="images/tr.png">
+            <param name="content-type" value="image/png"/>
+        </resource>
+        <resource type="download" name="images/closelabel.gif" location="images/closelabel.gif">
+            <param name="content-type" value="image/gif"/>            
+        </resource>
+        <resource type="download" name="images/loading.gif" location="images/loading.gif">
+            <param name="content-type" value="image/gif"/>
+        </resource>
+        <context>main</context>
+        <context>admin</context>
+    </web-resource>
+
+
+    <web-section key="socialnetworking-websection" name="Social Networking Web Section" location="system.user" weight="200">
+        <description key="socialnetworking.twitter.section.desc">Twitter Social Networking Web Section</description>
+        <label key="confluence.socialnetworking"/>
+    </web-section>
+    
+    <web-item key="socialnetworking-twitter-webitem" name="Twitter" section="system.user/socialnetworking-websection" weight="10">
+        <description key="socialnetworking.twitter.desc">Twitter Social Networking Web Item</description>
+        <label key="socialnetworking.twitter.label"/>
+        <link linkId="confluence-twitter"></link>
+        <styleClass>twitter</styleClass>
+    </web-item>
+    
+    <web-item key="socialnetworking-setting-webitem" name="Social Networking Setting Web Item" section="system.profile" weight="200">
+        <description key="socialnetworking.setting.twitter.desc">Twitter Social Networking Web Section</description>
+        <label key="socialnetworking.setting.twitter.label"/>
+        <link linkId="confluence-setting-socialnetworking">/users/socialnetworkingSettings.action?username=$generalUtil.doubleUrlEncode($helper.action.remoteUser.name)</link>
+        <styleClass>twitter</styleClass>
+    </web-item>
+
+    <web-item key="socialnetworking-setting-webitem-profile" name="Social Networking Setting Web Item on Profile" section="system.user/user-content" weight="70">
+        <description key="socialnetworking.setting.twitter.desc">Twitter Social Networking Web Section</description>
+        <label key="socialnetworking.setting.twitter.label"/>
+        <link linkId="confluence-setting-socialnetworking">/users/socialnetworkingSettings.action?username=$generalUtil.doubleUrlEncode($helper.action.remoteUser.name)</link>
+        <styleClass>twitter</styleClass>
+    </web-item>
+
+    <component key="socialnetworkingUserManager" name="Social Networking UserManager"
+        class="net.ariemurdianto.confluence.socialnetworking.manager.SocialnetworkingUserManager" />
+    
+    <!--<web-item key="personal-space" name="Personal Space" section="system.user/user-preferences" weight="10">-->
+        <!--<label key="space.personal.name"/>-->
+        <!--<link linkId="view-personal-space-link">/display/~$generalUtil.doubleUrlEncode($helper.action.remoteUser.name)</link>-->
+        <!--<condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.user.UserHasPersonalSpaceCondition"/>-->
+        <!--<styleClass>user-item personal-space</styleClass>-->
+    <!--</web-item>-->
+    
+<!--instead of using xwork, it will be much better to use servlet. Because it is plain
+    without including any of resources file.
+-->
+    <servlet key="socialnetworking-servlet" name="Social Networking Servlet" class="net.ariemurdianto.confluence.socialnetworking.servlet.FormTextUpdateServlet">
+        <url-pattern>/socialnetworking-twitter</url-pattern>
+    </servlet>
+    <servlet key="userstatusupdate-servlet" name="Resources Generator Servlet" class="net.ariemurdianto.confluence.socialnetworking.servlet.UserStatusUpdateServlet">
+        <url-pattern>/userstatusupdate-confluence</url-pattern>
+    </servlet>
+
+    <xwork name="Social Networking webwork" key="socialnetwork-webwork">
+        <description>Xwork actions for json service configuration.</description>
+        <package name="userss" extends="default" namespace="/users">
+            <default-interceptor-ref name="validatingStack"/>
+            <action name="socialnetworkingSettings" class="net.ariemurdianto.confluence.socialnetworking.settings.actions.UserSettingsAction">
+                <result name="success" type="velocity">../velocity/actionstemplate/UserSettingsActionTemplate.vm</result>
+            </action>
+        </package>
+    </xwork>
+
+</atlassian-plugin>

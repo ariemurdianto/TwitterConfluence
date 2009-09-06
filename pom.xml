@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>com.atlassian.confluence.plugin.base</groupId>
+        <artifactId>confluence-plugin-base</artifactId>
+        <version>22</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>confluence-twitter</groupId>
+    <artifactId>confluence-twitter</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>confluence-twitter</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <atlassian.product.version>3.0.0_01</atlassian.product.version>
+        <atlassian.product.data.version>3.0-SNAPSHOT</atlassian.product.data.version>
+        <confluence.plugin.bundled>true</confluence.plugin.bundled>
+        <jdkLevel>1.5</jdkLevel>
+        <atlassian.product.test-lib.version>2.1.2</atlassian.product.test-lib.version>
+        <confluence.plugin.bundled>true</confluence.plugin.bundled>
+
+        <jdkLevel>1.5</jdkLevel>
+    </properties>
+
+    <!--<scm>-->
+        <!--<connection>scm:svn:http://svn.atlassian.com/svn/public/contrib/confluence/confluence-json-webservice/tags/1.0</connection>-->
+        <!--<developerConnection>scm:svn:http://svn.atlassian.com/svn/public/contrib/confluence/confluence-json-webservice/tags/1.0</developerConnection>-->
+    <!--</scm>-->
+
+    <dependencies>
+
+        <!--Testing dependencies-->
+        <dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+			<version>2.5.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-legacy</artifactId>
+			<version>2.5.1</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit-dep</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence.plugin</groupId>
+            <artifactId>func-test</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+    </dependencies>
+</project>

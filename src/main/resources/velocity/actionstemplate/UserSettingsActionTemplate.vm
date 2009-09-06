@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>$action.getText("socialnetworking.setting.user.title")</title>
+    #standardHeader()
+</head>
+
+#applyDecorator("root")
+    #decoratorParam("context" "profile")
+    #decoratorParam("mode"  "socialnetworking-setting-webitem")
+    #decoratorParam("helper" $action.helper)
+    #decoratorParam("help-path" "/labels/help/my-labels-help.vm")
+    #decoratorParam("infopanel-width" "200px")
+
+   <body>
+   <div class="thickPadded"></div>
+    <form action="socialnetworkingSettings.action?username=admin" method="post">
+        <table>
+            <tr>
+                <td>
+                    Username:
+                </td>
+                <td>
+                    <input type="text" name="usernameTwitter" value="$usernameTwitter"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password:
+                </td>
+                <td>
+                    <input type="password" name="passwordTwitter" value="$passwordTwitter"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Number of tweets to display:
+                </td>
+                <td>
+                    <input type="text" size="5" name="numberToDisplay" value="$numberToDisplay"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Twitter Setting:
+                </td>
+                <td>
+                    <select name="twitterSetting">
+                        <option value="0" #if($twitterSetting == "0") selected #end>Update Twitter status only</option>
+                        <option value="1" #if($twitterSetting == "1") selected #end>Update Twitter and Confluence status</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="Save" value="Save"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+   </body>
+
+#end
+</html>
